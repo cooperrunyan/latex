@@ -1,0 +1,15 @@
+.editor {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+.toolbar {
+	min-height: calc(36rem / 16);
+	display: flex;
+	padding: calc(4rem / 16) calc(8rem / 16);
+	gap: calc(2rem / 16);
+	align-items: center;
+	justify-content: flex-end;
+}
