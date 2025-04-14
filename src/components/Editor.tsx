@@ -13,7 +13,7 @@ export const Editor: FC<Props> = ({ defaultValue, setInput }) => {
   useMonacoLatex();
 
   return (
-    <div className={style.editor}>
+    <div className={style.editor} data-html2canvas-ignore>
       <div className={style.head} />
       <MonacoEditor
         height="calc(100% - 36rem / 16)"

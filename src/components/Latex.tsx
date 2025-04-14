@@ -1,5 +1,5 @@
 "use client";
-import { type FC, type RefObject, useEffect, useMemo } from "react";
+import { type FC, type RefObject, useMemo } from "react";
 
 import { mathjax } from "mathjax-full/js/mathjax";
 import { TeX } from "mathjax-full/js/input/tex";
@@ -30,7 +30,7 @@ export const Latex: FC<Props> = ({
 }) => {
   const inputOptions = { packages: AllPackages, ..._inputOptions };
   const outputOptions = { scale: 1, ..._outputOptions };
-  const convertOptions = { display: true, ..._convertOptions };
+  const convertOptions = { display: false, ..._convertOptions };
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const doc = useMemo(() => {

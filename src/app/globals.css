@@ -1,17 +1,18 @@
 :root {
-  --grey-0: #0a0a0a;
-  --grey-1: #0f0f0f;
-  --grey-2: #141414;
-  --grey-3: #1f1f1f;
-  --grey-4: #3d3d3d;
+  --grey-0: #ffffff;
+  --grey-1: #ebebeb;
+  --grey-2: #cccccc;
+  --grey-3: #a3a3a3;
+  --grey-4: #808080;
   --grey-5: #5c5c5c;
-  --grey-6: #808080;
-  --grey-7: #a3a3a3;
-  --grey-8: #cccccc;
-  --grey-9: #ffffff;
+  --grey-6: #3d3d3d;
+  --grey-7: #1f1f1f;
+  --grey-8: #141414;
+  --grey-9: #0f0f0f;
+  --grey-10: #0a0a0a;
 
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--grey-0);
+  --foreground: var(--grey-9);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -53,12 +53,18 @@ const DEFAULT_INPUT = String.raw`\begin{align}
    
 \iiint_R \left( \nabla \cdot \vec F \right) dV = \oint_{\partial R} \vec F \cdot  d \vec S
 
-\\\\ \tag{Step}  u(t) = \begin{cases} 
+\\
+\\ 
+
+u(t) = \begin{cases} 
  0 & t < 0 \\
  1 & t \ge 0
 \end{cases} 
 
-\\\\ \begin{bmatrix} 
+\\
+\\ 
+
+\begin{bmatrix} 
         1 & 2 & 3 \\
         4 & 1 & 8 \\
         0 & 5 & 1
@@ -70,7 +76,10 @@ const DEFAULT_INPUT = String.raw`\begin{align}
         0 & 0 & 1
      \end{bmatrix} 
 
-\\\\ \overbrace{a+b+c}^{\text{note}} && {a \brack b} && a \over b
+\\
+\\ 
+
+\overbrace{a+b+c}^{\text{note}} && {a \brack b} && a \over b
 
 \end{align}
 

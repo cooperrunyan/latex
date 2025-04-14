@@ -4,7 +4,7 @@
   height: calc(36rem / 16);
   width: calc(36rem / 16);
   transition: all .2s ease-in-out;
-  color: var(--grey-8);
+  color: var(--grey-7);
   cursor: pointer;
   background-color: var(--background);
   display: grid;
