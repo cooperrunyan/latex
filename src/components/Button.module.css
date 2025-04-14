@@ -1,0 +1,81 @@
+.button {
+  border: 1px solid var(--grey-2);
+  border-radius: calc(8rem / 16);
+  height: calc(36rem / 16);
+  width: calc(36rem / 16);
+  transition: all .2s ease-in-out;
+  color: var(--grey-8);
+  cursor: pointer;
+  background-color: var(--background);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.button * {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+}
+
+.button .show {
+  opacity: 1;
+  transition: all .25s .15s ease-in-out;
+}
+
+.button .hide {
+  opacity: 0;
+  transition: none;
+}
+
+.button:hover {
+  border-color: var(--grey-3);
+  color: var(--grey-9);
+  background-color: var(--grey-1);
+}
+
+.button:active {
+  color: var(--grey-10);
+  background-color: var(--grey-2);
+}
+
+.button[data-is-loading="true"] {
+  border-color: var(--grey-1);
+  color: var(--grey-7);
+  background-color: var(--grey-1);
+  cursor: default;
+}
+
+.button .icon {
+  opacity: 1;
+}
+
+.button .loading {
+  opacity: 0;
+}
+
+.button[data-is-loading="true"] .icon {
+  opacity: 0;
+}
+
+.button[data-is-loading="true"] .loading {
+  opacity: 1;
+}
+
+.button[data-is-loading="true"] .loading {
+  stroke-dasharray: 46 46;
+  animation: loading 2s ease infinite;
+}
+
+@keyframes loading {
+  0% {
+    stroke-dashoffset: 46;
+  }
+
+  95% {
+    stroke-dashoffset: -46;
+  }
+
+  100% {
+    stroke-dashoffset: -46;
+  }
+}

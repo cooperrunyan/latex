@@ -1,20 +1,50 @@
 "use client";
 
-import Image from "next/image";
-
 import style from "./page.module.css";
 
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
-import { type FC, useState } from "react";
+import { type FC, useRef, useState } from "react";
 import { Latex } from "@/components/Latex";
 import { Editor } from "@/components/Editor";
+import { Button } from "@/components/Button";
 import { useWindowSizeMediaQuery } from "@/lib/useMediaQuery";
 
+import { Copy, Download } from "lucide-react";
+import { download, imageBlob } from "@/lib/image";
+
 const Display: FC<{ input: string }> = ({ input }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
     <div className={style.display}>
-      <Latex input={input} />
+      <Latex input={input} ref={ref} />
+
+      <div className={style.toolbar}>
+        <Button
+          loads
+          icon={Copy}
+          onClick={() =>
+            navigator.clipboard?.write?.([
+              new ClipboardItem({
+                "image/png": (async () => {
+                  if (!ref.current) return null as never;
+                  return imageBlob(ref.current, "image/png");
+                })(),
+              }),
+            ])
+          }
+        />
+
+        <Button
+          loads
+          icon={Download}
+          onClick={() => {
+            if (!ref.current) return;
+            return download(ref.current, "Latex.png");
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -46,6 +76,7 @@ const DEFAULT_INPUT = String.raw`\begin{align}
 
 % This is a comment
 `;
+
 export default function Home() {
   const [input, setInput] = useState(DEFAULT_INPUT);
 

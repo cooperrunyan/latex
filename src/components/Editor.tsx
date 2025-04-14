@@ -14,7 +14,7 @@ export const Editor: FC<Props> = ({ defaultValue, setInput }) => {
 
   return (
     <div className={style.editor}>
-      <div className={style.toolbar}></div>
+      <div className={style.head} />
       <MonacoEditor
         height="calc(100% - 36rem / 16)"
         width="100%"
