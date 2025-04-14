@@ -3,6 +3,7 @@
 import style from "./page.module.css";
 
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import Head from "next/head";
 
 import { type FC, useRef, useState } from "react";
 import { Latex } from "@/components/Latex";
@@ -17,35 +18,40 @@ const Display: FC<{ input: string }> = ({ input }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <div className={style.display}>
-      <Latex input={input} ref={ref} />
+    <>
+      <Head>
+        <title>Latex Editor</title>
+      </Head>
+      <div className={style.display}>
+        <Latex input={input} ref={ref} />
 
-      <div className={style.toolbar}>
-        <Button
-          loads
-          icon={Copy}
-          onClick={() =>
-            navigator.clipboard?.write?.([
-              new ClipboardItem({
-                "image/png": (async () => {
-                  if (!ref.current) return null as never;
-                  return imageBlob(ref.current, "image/png");
-                })(),
-              }),
-            ])
-          }
-        />
+        <div className={style.toolbar}>
+          <Button
+            loads
+            icon={Copy}
+            onClick={() =>
+              navigator.clipboard?.write?.([
+                new ClipboardItem({
+                  "image/png": (async () => {
+                    if (!ref.current) return null as never;
+                    return imageBlob(ref.current, "image/png");
+                  })(),
+                }),
+              ])
+            }
+          />
 
-        <Button
-          loads
-          icon={Download}
-          onClick={() => {
-            if (!ref.current) return;
-            return download(ref.current, "Latex.png");
-          }}
-        />
+          <Button
+            loads
+            icon={Download}
+            onClick={() => {
+              if (!ref.current) return;
+              return download(ref.current, "Latex.png");
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
