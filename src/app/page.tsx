@@ -5,17 +5,18 @@ import style from "./page.module.css";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import Head from "next/head";
 
-import { type FC, useRef, useState } from "react";
-import { Latex } from "@/components/Latex";
+import { type FC, useState } from "react";
 import { Editor } from "@/components/Editor";
 import { Button } from "@/components/Button";
 import { useWindowSizeMediaQuery } from "@/lib/useMediaQuery";
+
+import { MathJaxContext, MathJax } from "better-react-mathjax";
 
 import { Copy, Download } from "lucide-react";
 import { download, imageBlob } from "@/lib/image";
 
 const Display: FC<{ input: string }> = ({ input }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const id = "tex-output";
 
   return (
     <>
@@ -23,7 +24,7 @@ const Display: FC<{ input: string }> = ({ input }) => {
         <title>Latex Editor</title>
       </Head>
       <div className={style.display}>
-        <Latex input={input} ref={ref} />
+        <MathJax id={id} text={input || " "} dynamic />
 
         <div className={style.toolbar}>
           <Button
@@ -33,8 +34,9 @@ const Display: FC<{ input: string }> = ({ input }) => {
               navigator.clipboard?.write?.([
                 new ClipboardItem({
                   "image/png": (async () => {
-                    if (!ref.current) return null as never;
-                    return imageBlob(ref.current, "image/png");
+                    const svg = document?.getElementById(id) as HTMLElement;
+                    if (!svg) return null as never;
+                    return imageBlob(svg, "image/png");
                   })(),
                 }),
               ])
@@ -45,8 +47,9 @@ const Display: FC<{ input: string }> = ({ input }) => {
             loads
             icon={Download}
             onClick={() => {
-              if (!ref.current) return;
-              return download(ref.current, "Latex.png");
+              const svg = document?.getElementById(id) as HTMLElement;
+              if (!svg) return null as never;
+              return download(svg, "Latex.png");
             }}
           />
         </div>
@@ -92,6 +95,21 @@ u(t) = \begin{cases}
 % This is a comment
 `;
 
+const config = {
+  "fast-preview": { disabled: true },
+  tex: {
+    inlineMath: [
+      ["$", "$"],
+      ["\\(", "\\)"],
+    ],
+    displayMath: [
+      ["$$", "$$"],
+      ["\\[", "\\]"],
+    ],
+  },
+  messageStyle: "none",
+};
+
 export default function Home() {
   const [input, setInput] = useState(DEFAULT_INPUT);
 
@@ -100,19 +118,33 @@ export default function Home() {
   );
 
   return (
-    <div className={style.page}>
-      <PanelGroup
-        autoSaveId="panel"
-        direction={vertical ? "vertical" : "horizontal"}
-      >
-        <Panel defaultSize={50} minSize={25}>
-          <Editor defaultValue={DEFAULT_INPUT} setInput={setInput} />
-        </Panel>
-        <PanelResizeHandle className={style.resize} />
-        <Panel defaultSize={50} minSize={25}>
-          <Display input={input} />
-        </Panel>
-      </PanelGroup>
-    </div>
+    <MathJaxContext
+      version={4}
+      hideUntilTypeset="first"
+      config={config}
+      renderMode="pre"
+      typesettingOptions={{
+        fn: "tex2svg",
+        options: {
+          // containerWidth:
+        },
+      }}
+      src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"
+    >
+      <div className={style.page}>
+        <PanelGroup
+          autoSaveId="panel"
+          direction={vertical ? "vertical" : "horizontal"}
+        >
+          <Panel defaultSize={50} minSize={25}>
+            <Editor defaultValue={DEFAULT_INPUT} setInput={setInput} />
+          </Panel>
+          <PanelResizeHandle className={style.resize} />
+          <Panel defaultSize={50} minSize={25}>
+            <Display input={input} />
+          </Panel>
+        </PanelGroup>
+      </div>
+    </MathJaxContext>
   );
 }
