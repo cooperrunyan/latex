@@ -26,7 +26,7 @@ export const Editor: FC<Props> = ({ defaultValue, setInput }) => {
           bracketPairColorization: { enabled: true },
           fontFamily: "var(--font-geist-mono)",
           glyphMargin: false,
-          guides: { highlightActiveIndentation: false, indentation: false },
+          // guides: { highlightActiveIndentation: false, indentation: false },
           scrollBeyondLastLine: false,
           minimap: { enabled: false },
           overviewRulerBorder: false,
@@ -34,9 +34,9 @@ export const Editor: FC<Props> = ({ defaultValue, setInput }) => {
           hideCursorInOverviewRuler: true,
           renderLineHighlight: "none",
           contextmenu: false,
-          renderValidationDecorations: "off",
+          // renderValidationDecorations: "off",
           overviewRulerLanes: 0,
-          lineNumbers: "off",
+          // lineNumbers: "off",
           wordWrap: "on",
         }}
       />

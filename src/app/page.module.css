@@ -24,7 +24,7 @@
 }
 
 .resize {
-  background-color: var(--grey-1);
+  background-color: var(--grey-2);
   transition: background-color .1s ease;
 }
 

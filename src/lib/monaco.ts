@@ -363,7 +363,7 @@ function dark() {
 
   return {
     base: "vs-dark",
-    inherit: true,
+    inherit: false,
     rules: [
       {
         foreground: p.grey[5],
@@ -421,13 +421,13 @@ function dark() {
     colors: {
       "editor.foreground": p.grey[8],
       "editor.background": p.grey[1],
-      "editor.selectionBackground": p.grey[2],
+      "editor.selectionBackground": p.grey[3],
       "editor.inactiveSelectionBackground": p.grey[2],
       "editor.lineHighlightBackground": "#444d56",
       "editorCursor.foreground": p.grey[8],
       "editorWhitespace.foreground": "#0d111700",
-      "editorIndentGuide.background": "#6a737d",
-      "editorIndentGuide.activeBackground": "#f6f8fa",
+      "editorIndentGuide.background": p.grey[3],
+      "editorIndentGuide.activeBackground": p.grey[4],
       "editor.selectionHighlightBorder": "#444d56",
       "editor.wordHighlightBackground": p.grey[3],
       "editor.wordHighlightTextBackground": p.grey[3],
@@ -465,7 +465,7 @@ function light() {
   };
 
   return {
-    base: "vs-dark",
+    base: "vs",
     inherit: false,
     rules: [
       {
@@ -529,8 +529,8 @@ function light() {
       "editor.lineHighlightBackground": "#444d56",
       "editorCursor.foreground": p.grey[0],
       "editorWhitespace.foreground": "#0d111700",
-      "editorIndentGuide.background": "#6a737d",
-      "editorIndentGuide.activeBackground": "#f6f8fa",
+      "editorIndentGuide.background": p.grey[8],
+      "editorIndentGuide.activeBackground": p.grey[7],
       "editor.selectionHighlightBorder": "#444d56",
       "editor.wordHighlightBackground": "#dadada",
       "editor.wordHighlightTextBackground": "#dadada",
